@@ -15,30 +15,48 @@ window.addEventListener('load', () => {
   const boxes = document.getElementsByClassName('boxes');
   const snake = [];
   let randomBox;
+  let randomIndex;
   let mySnake = document.getElementsByClassName('snake');
+  let food = document.createElement('img');
+  food.setAttribute('class', 'food');
+  food.src = './img/kiwi.ico';
 
   let dir;
-  let ind = 208;
+  let ind = 208; //this is our snakes starting index(div-box,which is located in 208);
   snake[0] = ind;
+
   let indRemove = 208;
 
   function getIndex(index) {
-    snake.unshift(index);
+    if (randomIndex === snake[0]) {
+      drawSnake();
+      drawFood();
+      // snake.pop();
+    }
     snake.pop();
+    snake.unshift(index);
   }
 
+  // function addLength() {
+  //   let i;
+  //   let location;
+  //   for (i = 0; i < boxes.length; i++) {
+  //     location = snake[i];
+  //     boxes[location].classList.add('snake');
+  //   }
+  //   snake.unshift(location);
+  // }
+
   function drawSnake() {
-    for (let i = 0; i < snake.length; i++) {
+    let i;
+    for (i = 0; i < snake.length; i++) {
       let location = snake[i];
       boxes[location].classList.add('snake');
     }
   }
 
   function drawFood() {
-    let food = document.createElement('img');
-    food.setAttribute('class', 'food');
-    food.src = './img/kiwi.ico';
-    let randomIndex = Math.floor(Math.random() * boxes.length);
+    randomIndex = Math.floor(Math.random() * boxes.length);
     randomBox = boxes[randomIndex];
     randomBox.appendChild(food);
   }
@@ -56,8 +74,11 @@ window.addEventListener('load', () => {
   }
 
   function move() {
+    //we get dir=direction from keyListener in order to know which way to increase/decrease the snakes index.
     if (dir === 'LEFT') {
+      //remove class snake before creating another one.
       boxes[ind].classList.remove('snake');
+      //we increase index and pass it to getIndex which will push the new increased or decreased index to snakes array for update
       ind--;
       getIndex(ind);
     }
