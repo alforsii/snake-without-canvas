@@ -1,0 +1,27 @@
+#game-board {
+  width: 640px;
+  height: 640px;
+  line-height: 0;
+  border: 1px solid red;
+}
+
+.dark-blue,
+.blue {
+  width: 32px;
+  height: 32px;
+  /* border: 1px rgb(116, 114, 114) solid; */
+  display: inline-block;
+}
+.dark-blue {
+  background: rgb(6, 159, 214);
+}
+.blue {
+  background: #fff;
+}
+
+.snake {
+  background: orange;
+  width: 32px;
+  height: 32px;
+  /* display: inline-block; */
+}
