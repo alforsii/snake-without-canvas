@@ -14,7 +14,9 @@ window.addEventListener('load', () => {
   document.querySelector('#game-board').innerHTML = html;
   const boxes = document.getElementsByClassName('boxes');
   const snake = [];
+  let randomBox;
   let mySnake = document.getElementsByClassName('snake');
+
   let dir;
   let ind = 208;
   snake[0] = ind;
@@ -23,15 +25,6 @@ window.addEventListener('load', () => {
   function getIndex(index) {
     snake.unshift(index);
     snake.pop();
-    // for (let i = 0; i < boxes.length; i++) {
-    // snake[208] = boxes[208].classList.add('snake');
-    // if (dir === 'LEFT') {
-    //   let rm = index - 1;
-    //   boxes[208].classList.remove('snake');
-    //   boxes[index].classList.add('snake');
-    //   boxes[rm].classList.remove('snake');
-    // }
-    // }
   }
 
   function drawSnake() {
@@ -39,6 +32,15 @@ window.addEventListener('load', () => {
       let location = snake[i];
       boxes[location].classList.add('snake');
     }
+  }
+
+  function drawFood() {
+    let food = document.createElement('img');
+    food.setAttribute('class', 'food');
+    food.src = './img/kiwi.ico';
+    let randomIndex = Math.floor(Math.random() * boxes.length);
+    randomBox = boxes[randomIndex];
+    randomBox.appendChild(food);
   }
 
   function keyListener() {
@@ -79,8 +81,6 @@ window.addEventListener('load', () => {
     move();
     keyListener();
     drawSnake();
-    // drawSnake(ind);
-    // console.log('Output for: snake', snake);
-  }, 200);
-  // console.log('Output for: drawSnake()', drawSnake());
+  }, 150);
+  drawFood();
 });
